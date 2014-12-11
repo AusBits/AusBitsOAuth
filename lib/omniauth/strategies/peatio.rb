@@ -30,6 +30,18 @@ module OmniAuth
         @me ||= peatio_client.get '/api/v2/members/me'
       end
 
+      def authorize_params
+        super.tap do |params|
+          %w[scope client_options].each do |v|
+            if request.params[v]
+              params[v.to_sym] = request.params[v]
+            end
+          end
+
+          params[:scope] ||= 'profile payment'
+        end
+      end
+
       private
       def peatio_client
         key, secret = access_token.token.split(':')
