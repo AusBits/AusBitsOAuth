@@ -1,5 +1,5 @@
 module OmniAuth
-  module Peatio
+  module Ausbits
     VERSION = "0.0.1"
   end
 end

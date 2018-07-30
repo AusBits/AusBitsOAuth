@@ -1,11 +1,11 @@
 require "omniauth-oauth2"
-require "peatio_client"
+require "ausbits_client"
 
 module OmniAuth
   module Strategies
-    class Peatio < OmniAuth::Strategies::OAuth2
+    class Ausbits < OmniAuth::Strategies::OAuth2
       option :client_options, {
-        :site           => "https://yunbi.com"
+        :site           => "https://ausbits.com.au"
       }
 
       uid do
@@ -27,7 +27,7 @@ module OmniAuth
       end
 
       def raw_info
-        @me ||= peatio_client.get '/api/v2/members/me'
+        @me ||= ausbits_client.get '/api/v2/members/me'
       end
 
       def authorize_params
@@ -43,9 +43,9 @@ module OmniAuth
       end
 
       private
-      def peatio_client
+      def ausbits_client
         key, secret = access_token.token.split(':')
-        @peatio_client ||= PeatioAPI::Client.new(
+        @ausbits_client ||= AusbitsAPI::Client.new(
           access_key: key,
           secret_key: secret,
           endpoint:   options.client_options[:site]
@@ -55,4 +55,4 @@ module OmniAuth
   end
 end
 
-OmniAuth.config.add_camelization "peatio", "Peatio"
+OmniAuth.config.add_camelization "ausbits", "Ausbits"

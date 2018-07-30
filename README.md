@@ -1,1 +1,1 @@
-# OmniAuth for Peatio
+# OmniAuth for Ausbits
