@@ -1,1 +1,1 @@
-# OmniAuth for Ausbits
+# OmniAuth for Ausbits - www.ausbits.com.au
